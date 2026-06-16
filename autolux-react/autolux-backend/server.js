@@ -1,4 +1,4 @@
-// Force Node to use a reliable public DNS resolver (fixes Node v24+ SRV network bugs on Windows)
+// server.js // Force Node to use a reliable public DNS resolver (fixes Node v24+ SRV network bugs on Windows)
 require('node:dns/promises').setServers(['8.8.8.8', '1.1.1.1']);
 
 const express = require('express');
@@ -17,8 +17,27 @@ const initialCars = require('./data/cars');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// ===== PRODUCTION CORS SETTINGS =====
+// Allows your Vercel frontend to reliably talk to your Railway backend
+const allowedOrigins = [
+  'https://mern-five-eta.vercel.app', // Your production Vercel link
+  'http://localhost:5173',             // Keep local Vite frontend working for testing
+  'http://localhost:3000'              // Keep local CRA working if applicable
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 
 // ===== DATABASE CONNECTION & SEEDING =====
@@ -31,12 +50,16 @@ mongoose.connect(process.env.MONGO_URI, connectOptions)
   .then(async () => {
     console.log('🔌 MongoDB Connected Successfully to Cloud Atlas.');
     
-    // Auto-seed data if database inventory collection is empty
-    const carCount = await Car.countDocuments();
-    if (carCount === 0) {
-      console.log('📦 Inventory collection is empty. Seeding initial luxury fleet data...');
-      await Car.insertMany(initialCars);
-      console.log('✅ Database successfully seeded!');
+    // Auto-seed data safely wrapped in a try/catch block for production container boots
+    try {
+      const carCount = await Car.countDocuments();
+      if (carCount === 0) {
+        console.log('📦 Inventory collection is empty. Seeding initial luxury fleet data...');
+        await Car.insertMany(initialCars);
+        console.log('✅ Database successfully seeded!');
+      }
+    } catch (seedError) {
+      console.warn('⚠️ Seeding validation skipped or encountered an error:', seedError.message);
     }
   })
   .catch(err => {
