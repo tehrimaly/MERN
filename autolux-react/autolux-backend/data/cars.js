@@ -1,0 +1,13 @@
+const carsData = [
+  { id:1, brand:'Porsche', name:'911 GT3 RS', price:'$249,900', priceNum:249, specs:['500 hp','0–60 in 3.0s','PDK 7-spd','Petrol'], category:'super', badge:'Limited', img:'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?w=800&q=80&auto=format&fit=crop' },
+  { id:2, brand:'Ferrari', name:'F8 Tributo', price:'$276,550', priceNum:276, specs:['710 hp','0–60 in 2.9s','DCT 7-spd','Petrol'], category:'super', badge:'Hot', img:'https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=800&q=80&auto=format&fit=crop' },
+  { id:3, brand:'Bentley', name:'Continental GT', price:'$239,900', priceNum:239, specs:['626 hp','0–60 in 3.5s','DCT 8-spd','Petrol'], category:'luxury', badge:'New', img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80&auto=format&fit=crop' },
+  { id:4, brand:'Mercedes', name:'AMG GT Black', price:'$185,000', priceNum:185, specs:['720 hp','0–60 in 3.1s','Automatic','Petrol'], category:'sport', badge:'', img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80&auto=format&fit=crop' },
+  { id:5, brand:'Rolls-Royce', name:'Ghost EWB', price:'$489,000', priceNum:489, specs:['563 hp','0–60 in 4.8s','Auto 8-spd','Petrol'], category:'luxury', badge:'', img:'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=800&q=80&auto=format&fit=crop' },
+  { id:6, brand:'Porsche', name:'Taycan Turbo S', price:'$187,200', priceNum:187, specs:['750 hp','0–60 in 2.6s','Auto','Electric'], category:'electric', badge:'New', img:'https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&q=80&auto=format&fit=crop' },
+  { id:7, brand:'Lamborghini', name:'Huracán EVO', price:'$229,995', priceNum:229, specs:['631 hp','0–60 in 2.9s','DCT 7-spd','Petrol'], category:'super', badge:'Hot', img:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80&auto=format&fit=crop' },
+  { id:8, brand:'BMW', name:'M8 Competition', price:'$134,100', priceNum:134, specs:['617 hp','0–60 in 3.0s','M-DCT','Petrol'], category:'sport', badge:'', img:'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80&auto=format&fit=crop' },
+  { id:9, brand:'Tesla', name:'Model S Plaid', price:'$108,990', priceNum:108, specs:['1020 hp','0–60 in 1.99s','Auto','Electric'], category:'electric', badge:'New', img:'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800&q=80&auto=format&fit=crop' },
+];
+
+module.exports = carsData;
